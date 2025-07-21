@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Steganography Encryption (Hide Text)</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body> 
+    <nav>
+        <a href="/encrypt">Encrypt</a> | <a href="/decrypt">Decrypt</a>
+    </nav>
+    <h1>Hide Text in Media (Encryption)</h1>
+    <form id="stegoForm" enctype="multipart/form-data">
+        <label>Select Media Type:</label>
+        <select id="mediaType" name="mediaType">
+            <option value="image">Image (PNG)</option>
+            <option value="audio">Audio (WAV)</option>
+            <option value="video">Video (AVI)</option>
+        </select><br/><br/>
+        <label>Upload Media File:</label>
+        <input type="file" id="mediaFile" name="mediaFile" required /><br/><br/>
+        <label>Text to Hide:</label>
+        <textarea id="textMessage" name="textMessage" rows="4" cols="50" required></textarea><br/><br/>
+        <button type="submit">Hide Text</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        document.getElementById('stegoForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/hide', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                const blob = await response.blob();
+                const mediaType = formData.get('mediaType');
+                const url = URL.createObjectURL(blob);
+                let resultHTML = `<p>Text hidden successfully! Download the stego ${mediaType} file: <a href="${url}" download="stego.${mediaType === 'image' ? 'png' : mediaType === 'audio' ? 'wav' : 'avi'}">Download</a></p>`;
+                document.getElementById('result').innerHTML = resultHTML;
+            } else {
+                const error = await response.text();
+                document.getElementById('result').textContent = 'Error: ' + error;
+            }
+        });
+    </script>
+</body>
+</html>

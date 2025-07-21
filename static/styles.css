@@ -1,0 +1,135 @@
+body {
+    background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #23272f;
+    margin: 0;
+    padding: 0 0 50px 0;
+    min-height: 100vh;
+}
+
+h1, h2 {
+    color: #254973;
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 0.02em;
+    font-weight: 700;
+}
+
+nav {
+    text-align: center;
+    margin-top: 26px;
+    margin-bottom: 10px;
+}
+nav a {
+    color: #174b7e;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 7px 18px;
+    border-radius: 4px;
+    transition: background 0.18s;
+}
+nav a:hover {
+    background: #ecf7ff;
+    color: #1e6bb8;
+}
+
+form {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 430px;
+    margin: 26px auto;
+    padding: 30px 22px 22px 22px;
+    box-shadow: 0 4px 15px 0 #0e294019;
+    border: 1.5px solid #d4ebfb;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #225b7d;
+}
+input[type="file"], select, textarea {
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 10px 8px;
+    border-radius: 4px;
+    border: 1.2px solid #b1d3ec;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+textarea {
+    resize: vertical;
+    min-height: 74px;
+}
+button {
+    background: linear-gradient(90deg,#6397ff,#47c6ff);
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+    box-shadow: 0 1px 8px 0 #59a3f020;
+}
+button:hover, button:focus {
+    background: linear-gradient(90deg,#477bee, #47b8e0);
+}
+#result, #extractResult {
+    max-width: 430px;
+    margin: 22px auto;
+    background: #eaf6fb;
+    border: 1px solid #b7def1;
+    padding: 12px 17px;
+    font-size: 17px;
+    border-radius: 4px;
+    box-shadow: 0 2px 7px #eaf6fb40;
+    word-break: break-word;
+}
+hr {
+    border: none;
+    border-top: 1.5px solid #8ec2f9;
+    margin: 30px auto;
+    max-width: 60vw;
+}
+
+/* Loading spinner and processing style */
+.processing {
+    text-align: center;
+    font-size: 18px;
+    color: #2f7fff;
+    margin-top: 16px;
+}
+.spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3.5px solid #b7def1;
+    border-top: 3.5px solid #2980b9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 11px;
+    vertical-align: middle;
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+textarea[readonly] {
+    background: #f8fafc !important;
+    border: 1px solid #b7def1 !important;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    form, #result, #extractResult {
+        max-width: 98vw;
+        padding-left: 6vw;
+        padding-right: 6vw;
+    }
+    h1, h2 {
+        font-size: 22px;
+    }
+}

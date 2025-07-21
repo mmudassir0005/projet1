@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Steganography Decryption (Extract Text)</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+   <nav>
+        <a href="/encrypt">Encrypt</a> | <a href="/decrypt">Decrypt</a>
+    </nav>
+    <h1>Extract Text from Media (Decryption)</h1>
+    <form id="extractForm" enctype="multipart/form-data">
+        <label>Select Media Type:</label>
+        <select id="extractMediaType" name="extractMediaType">
+            <option value="image">Image (PNG)</option>
+            <option value="audio">Audio (WAV)</option>
+            <option value="video">Video (AVI)</option>
+        </select><br/><br/>
+        <label>Upload Media File:</label>
+        <input type="file" id="extractMediaFile" name="extractMediaFile" required /><br/><br/>
+        <button type="submit">Extract Text</button>
+    </form>
+    <div id="extractResult"></div>
+    <script>
+        document.getElementById('extractForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const extractResult = document.getElementById('extractResult');
+            extractResult.innerHTML = `
+                <div class="processing">
+                    <span class="spinner"></span>Processing, extracting message...
+                </div>
+            `;
+            const formData = new FormData(this);
+            try {
+                const response = await fetch('/extract', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    let resultHTML = `<p>Extracted Text: <textarea rows="4" cols="50">${data.text_message || ''}</textarea></p>`;
+                    extractResult.innerHTML = resultHTML;
+                } else {
+                    const error = await response.text();
+                    extractResult.textContent = 'Error: ' + error;
+                }
+            } catch (err) {
+                extractResult.textContent = 'Unexpected error during extraction.';
+            }
+        });
+    </script>
+</body>
+</html>

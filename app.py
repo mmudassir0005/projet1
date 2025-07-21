@@ -55,6 +55,7 @@ def embed_text_in_audio(audio_file, text):
         wav_out.setparams(params)
         wav_out.writeframes(bytes(frames))
     buffer.seek(0)
+    
     return buffer
 
 def embed_text_in_video(video_file, text):
@@ -71,7 +72,7 @@ def embed_text_in_video(video_file, text):
     out = cv2.VideoWriter(temp_output, fourcc, fps, (width, height))
     bit_idx = 0
     max_bits = width * height * 3 * frame_count
-    
+
     if len(binary_text) > max_bits:
         cap.release()
         out.release()

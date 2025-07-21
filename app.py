@@ -71,6 +71,7 @@ def embed_text_in_video(video_file, text):
     out = cv2.VideoWriter(temp_output, fourcc, fps, (width, height))
     bit_idx = 0
     max_bits = width * height * 3 * frame_count
+    
     if len(binary_text) > max_bits:
         cap.release()
         out.release()
